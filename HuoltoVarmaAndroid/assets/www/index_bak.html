@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+
+<!--
+ 1. the menu bar should give the panel name that allows it to stay, or the Ui will be blank.
+ 2. The content in the main panel should plus tag, if without tag the application will show error
+ 3. click event should use $(document).live('click',function)
+ -->
+<html> 
+	<head> 
+        <title>Jquery Mobile Splitview</title> 
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+            <link rel="stylesheet" href="css/jquery.mobile.css" />
+            <link rel="stylesheet" href="css/jquery.mobile.splitview.css" />
+            <link rel="stylesheet"  href="css/jquery.mobile.grids.collapsible.css" />
+            <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+            <script type="text/javascript" src="js/jquery.mobile.splitview.js"></script>
+            <script type="text/javascript" src="js/jquery.mobile.js"></script>
+            <script type="text/javascript" src="js/iscroll-wrapper.js"></script>
+            <script type="text/javascript" src="js/iscroll.js"></script>
+            <!--script type="text/javascript" src="scrollability.js"></script-->
+            <script type="text/javascript" src="cordova-2.0.0.js"></script>
+            <script type="text/javascript" src="js/index.js"></script>
+            <script type="text/javascript">
+               
+                
+                var wubaiqiinfo='{"uid":1,"name":"Wu Baiqi","address":"Olympiakatu","postiCode":65100, "email": "e0901026@gmail.com","telphone":"0405555570","headphoto":"wubaiqi.png"}';
+                var timoinfo='{"uid":2,"name":"Timo","address":"Vorinkatu","postiCode":65100, "email": "timo@gmail.com","telphone":"0406546745","headphoto":"timo.png"}';
+                var fengbininfo='{"uid":3,"name":"Feng Bin","address":"Olympiakatu","postiCode":65100, "email": "binfeng@gmail.com","telphone":"040347762","headphoto":"fengbin.png"}';
+     
+                app.initialize();
+          
+                $('.customerid_info').live('click', function () { 
+                                        var customerid = $(this).attr('id');
+                                           
+                                           var jsonData;
+                                           if(customerid==1){
+                                           jsonData=wubaiqiinfo;
+                                           }else if(customerid==2){
+                                           jsonData=timoinfo;
+                                           }else if(customerid==3){
+                                           jsonData=fengbininfo;
+                                           }
+                                           
+                                           var cusInfo=jQuery.parseJSON(jsonData); 
+                                           console.log(cusInfo);
+                                          
+                                           $('.customerheadername').html(cusInfo.name);
+                                           $('.customername').html(cusInfo.name);
+                                           $('.cuspostaddress').html(cusInfo.address);
+                                           $('.custelphone').html(cusInfo.telphone);
+                                           $('.cusemail').html(cusInfo.email);
+                                           $('.cusheadphoto').attr("src","img/"+cusInfo.headphoto);
+                                           
+                                                
+                                        
+                                   });
+             
+                </script>
+            </head> 
+    
+    <body> 
+        
+        <div data-role="panel" data-id="menu" data-hash="crumbs" data-context="a#default">
+            <!-- Start of first page -->
+            <div data-role="page" id="main" data-hash="false">
+                
+                <div data-role="header">
+                    <h1>Main</h1>
+                </div><!-- /header -->
+                
+                <div data-role="content">	
+                    <ul data-role="listview" data-filter="true" data-inset="true">
+                        <li>Wu Baiqi
+                            <ul>
+                            <li><a href="#customerInfoPanel" data-panel="main" id="1" class="customerid_info">Info</a></li>
+                            <li><a href="#" data-panel="main">Agreement</a></li>
+                            <li><a href="#" data-panel="main">HousePicture</a></li>
+                            <li><a href="#" data-panel="main">History Inspection</a></li>
+                            <li><a href="#" data-panel="main">New Inspection</a></li>
+
+                            </ul>
+                        </li>
+                        <li>Timo
+                            <ul>
+                                <li><a href="#customerInfoPanel" data-panel="main" id="2" class="customerid_info">Info</a></li>
+                                <li><a href="#" data-panel="main">Agreement</a></li>
+                                <li><a href="#" data-panel="main">HousePicture</a></li>
+                                <li><a href="#" data-panel="main">History Inspection</a></li>
+                                <li><a href="#" data-panel="main">New Inspection</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li>Fengbin
+                            <ul>
+                                <li><a href="#customerInfoPanel" data-panel="main" id="3" class="customerid_info">Info</a></li>
+                                <li><a href="#" data-panel="main">Agreement</a></li>
+                                <li><a href="#" data-panel="main">HousePicture</a></li>
+                                <li><a href="#" data-panel="main">History Inspection</a></li>
+                                <li><a href="#" data-panel="main">New Inspection</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul> 	
+                </div><!-- /content -->
+            </div><!-- /page -->
+        </div><!-- panel menu -->
+        
+        
+        
+        
+        <div data-role="panel" data-id="main">
+            <div data-role="page" id="customerInfoPanel">
+                
+                <div data-role="header">
+                    <h1 class="customerheadername">Wu Baiqi</h1>
+                    
+                </div><!-- /header -->
+                
+                <div data-role="content"> 
+                    
+                    <img src="img/customer.png" class="cusheadphoto"></img>
+                    <h2 class="customername"></h2>
+                    
+                    
+                    <br/>
+                    <hr/>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><strong>Postipaikka</strong> <span class='cuspostaddress'><span></div>
+                        <div class="ui-block-b"><strong>Puhelinnumerot</strong> <span class='custelphone'><span></div>
+                        <div class="ui-block-c"><strong>Sahkopostiosoiteet</strong><span class='cusemail'><span></div>
+                        
+                    </div>
+                    <br/>
+                    <hr/>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a"><strong>Rakennusvuosi</strong><span>unknown<span></div>
+                        <div class="ui-block-b"><strong>Huoneita</strong><span>unknown<span></div>
+                        <div class="ui-block-c"><strong>Tehtavat</strong><span>unknown<span></div>
+                        
+                    </div>
+                    
+                    
+          
+                </div><!-- /content -->
+            
+            </div><!-- /page -->
+             
+            
+            
+         
+            
+                        
+        </div><!-- panel main -->
+                        
+                        
+ </body>
+ </html>

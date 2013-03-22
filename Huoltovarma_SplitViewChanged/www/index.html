@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<!--
+#Author: Wu Baiqi
+#Company: Devatus Oy
+#Page: the Huoltovarma index page
+ #functionality:
+  1. split view that enable user could search customer at the left side bar, and quick show detail informaiton on the secondary content.
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width;" />
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jqm-docs.css" />
+
+<script type="text/javascript" src="js/photowipe/lib/klass.min.js"></script>
+<script type="text/javascript"
+	src="js/photowipe/code.photoswipe.jquery-3.0.5.min.js"></script>
+<script type="text/javascript"
+	src="js/photowipe/code.photoswipe-3.0.5.min.js"></script>
+
+
+<script src="js/editablegrid/editablegrid.js"></script>
+<!-- [DO NOT DEPLOY] -->
+<script src="js/editablegrid/editablegrid_renderers.js"></script>
+<!-- [DO NOT DEPLOY] -->
+<script src="js/editablegrid/editablegrid_editors.js"></script>
+<!-- [DO NOT DEPLOY] -->
+<script src="js/editablegrid/editablegrid_validators.js"></script>
+<!-- [DO NOT DEPLOY] -->
+<script src="js/editablegrid/editablegrid_utils.js"></script>
+<!-- [DO NOT DEPLOY] -->
+<script src="js/editablegrid/editablegrid_charts.js"></script>
+<link rel="stylesheet" href="js/editablegrid/editablegrid.css"
+	type="text/css" media="screen">
+
+<style type="text/css">
+.ui-listview-filter {
+	border-width: 0;
+	overflow: hidden;
+	margin: auto;
+}
+
+body {
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	font-size: 11px;
+}
+
+h1 {
+	font-size: 15px;
+}
+
+a {
+	color: #548dc4;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+table.testgrid {
+	border-collapse: collapse;
+	border: 1px solid #CCB;
+}
+
+table.testgrid td,table.testgrid th {
+	padding: 5px;
+	border: 1px solid #E0E0E0;
+}
+
+table.testgrid th {
+	background: #E5E5E5;
+	text-align: center;
+}
+
+input.invalid {
+	background: red;
+	color: #FDFDFD;
+}
+
+.centeredImage {
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 0px;
+}
+</style>
+
+
+
+<title>Hello Cordova</title>
+</head>
+<body onload="onBodyLoad()">
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="b">
+			<h1>Huoltovarma Index</h1>
+			<a href="#" data-icon="home" data-iconpos="notext"
+				data-direction="reverse">Home</a>
+			<!--the navigator page to doing the fast search using dialog, because the Jquery Mobile 1.2.0 is in Beta version now.-->
+			<a href="#" data-icon="search" data-iconpos="notext"
+				data-rel="dialog" data-transition="fade">Search</a>
+		</div>
+		<!-- /header -->
+
+		<div data-role="content">
+
+			<div class="content-primary">
+
+				<div id="customerInfoPanel" class='panel' style="display: none">
+					<img src="img/customer.png" class="cusheadphoto"></img>
+					<h2 class="customername"></h2>
+
+
+					<br />
+					<hr />
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<strong>Postipaikka</strong> <span class='cuspostaddress'><span>
+						</div>
+						<div class="ui-block-b">
+							<strong>Puhelinnumerot</strong> <span class='custelphone'><span>
+						</div>
+						<div class="ui-block-c">
+							<strong>Sahkopostiosoiteet</strong><span class='cusemail'><span>
+						</div>
+
+					</div>
+					<br />
+					<hr />
+					<div class="ui-grid-b">
+						<div class="ui-block-a">
+							<strong>Rakennusvuosi</strong><span>unknown<span>
+						</div>
+						<div class="ui-block-b">
+							<strong>Huoneita</strong><span>unknown<span>
+						</div>
+						<div class="ui-block-c">
+							<strong>Tehtavat</strong><span>unknown<span>
+						</div>
+
+					</div>
+				</div>
+				<!--customer Info panel-->
+
+				<div id="customerAgreementPanel" class='panel' style="display: none">
+					<h2>LAATUA ASUMISELLE</h2>
+					<p>Huoltovarma sopii omakotitalon rakentajille, joilla ei ole
+						halua, aikaa tai osaamista talon valmistumisen jälkeen huoltaa
+						itse taloansa sekä niille, jotka haluavat ammattilaisen
+						huolehtivan huollosta.</p>
+
+					<p>Huoltovarma pitää huolen siitä, että talon asukkaiden
+						elämänlaatu paranee ja että koti säilyttää arvonsa.</p>
+
+					<p>Ammattilaisemme tekevät talon vuosittaisen
+						huoltotarkastuksen tarkan laadunhallintajärjestelmän mukaisesti.
+						Vuositarkastuksessa käydään läpi talon kannalta olennaisimmat
+						huoltokohteet ja tehdään tarvittavat sovitut huoltotoimenpiteet.
+						Asukkaat voivat luottaa siihen, että taloa huolletaan oikein eikä
+						tarvitse pelätä yllätyksiä.</p>
+				</div>
+				<!-- customer aggrement panel -->
+
+
+   	          <div id="customerHousePicturePanel" class='panel' style="display: none">
+					<div data-role="collapsible" style="clear:both;">
+   						<h3>MainHall</h3>
+   						<div>
+   				
+   						<img src="img/016.jpg" alt="Image 016" style="float:left; margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						
+   						<br/>
+   						<div style="clear:both;">
+  						<p style="float:left;">Customer houses pre views previews</p>
+  						<a data-role="button" data-mini="true" data-inline="true" style="float:right"> View Detail</a>
+  						</div>
+  						 </div>
+					</div>
+					
+				<div data-role="collapsible" style="clear:both;">
+   						<h3>Kithchen</h3>
+   						<div>
+   				
+   						<img src="img/016.jpg" alt="Image 016" style="float:left; margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						
+   						<br/>
+   						<div style="clear:both;">
+  						<p style="float:left;">Customer houses pre views previews</p>
+  						<a data-role="button" data-mini="true" data-inline="true" style="float:right"> View Detail</a>
+  						</div>
+  						 </div>
+					</div>
+					
+					<div data-role="collapsible" style="clear:both;">
+   						<h3>Bathroom</h3>
+   						<div>
+   				
+   						<img src="img/016.jpg" alt="Image 016" style="float:left; margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						<img src="img/016.jpg" alt="Image 016" style="float:left;margin-left:3px;"/>
+   						
+   						<br/>
+   						<div style="clear:both;">
+  						<p style="float:left;">Customer houses pre views previews</p>
+  						<a data-role="button" data-mini="true" data-inline="true" style="float:right"> View Detail</a>
+  						</div>
+  						 </div>
+					</div>
+					
+					
+					
+				</div>
+				<!-- customer house picture panel -->
+				
+				  <div id="customerHistoryInspectionPanel" class='panel' style="display: none">
+					<div data-role="collapsible">
+   						<h3>12-5-2009 Inspected By: Pakka</h3>
+   						<div id="historyInspectionTable_inspectionid"></div>
+  						
+					</div>
+				</div>
+				<!-- customer house picture panel -->
+
+
+
+				<div id="customerNewInspectionPanel" class='panel'
+					style="display: none">
+
+					<div>
+						<p class="centeredImage">
+							<img src="img/016.jpg" alt="Image 016" align="middle" />
+						</p>
+						<br /> <br />
+						<div id="tablecontent"></div>
+
+						<div>
+							<h3>Camera:</h3>
+							<b>Status:</b> <span id="camera_status"></span><br>
+							<!--<b>Image:</b> <img style="width:120px;visibility:hidden;display:none;" id="camera_image" src="" /><br>
+					<input type="button" onclick="takePicture();" value="Take Picture" /><br/>-->
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<!--/content-primary -->
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b"
+					data-content-theme="d">
+
+					<h3>More in this section</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d"
+						data-filter="true" id='customerlist'>
+
+						<li data-role="list-divider">Customers</li>
+						<li class="customerlistitem" data-theme="a"><a href="#"
+							id="3">BinFeng</a></li>
+						<li class="customerlistitem"><a href="#" id="2">Timo</a></li>
+						<li class="customerlistitem"><a href="#" id="1">Wu Baiqi</a></li>
+
+					</ul>
+
+					<!--after user click the right customer the customer operation option will shows out-->
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d"
+						id="customerOperation" style="display: none;">
+						<li data-role="list-divider"><a href="#" data-role="button"
+							data-theme="a" data-mini="true" class="btn_backtocustomerlist"
+							style="margin: auto;">Back to Customerlist</a></li>
+						<li data-role="list-divider" style="text-align: center;"
+							id="customer-header-name">Wu Baiqi</li>
+						<li class="customerOptItem"><a href="#" id="3"
+							class="displayCustomerInfoPanel">Info</a></li>
+						<li class="customerOptItem"><a href="#" class="displayCustomerAgreementPanel">Agreement</a></li>
+						<li class="customerOptItem"><a href="#" class="displayCustomerHousePicturePanel">HousePicture</a></li>
+						<li class="customerOptItem"><a href="#" class="displayCustomerHistoryInspectionPanel">History
+								Inspection</a></li>
+						<li class="customerOptItem"><a href="#"
+							class="displayCustomerNewInspectionPanel">New Inspection</a></li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+		<!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2012 jQuery Foundation and other contributors</p>
+		</div>
+
+	</div>
+	<!-- /page -->
+
+
+	<script type="text/javascript" src="js/jqm-docs.js"></script>
+	<script type="text/javascript" src="cordova-2.0.0.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script
+		src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+	<script type="text/javascript">
+            
+            
+            function onBodyLoad(){
+              app.initialize();
+                
+                var wubaiqiinfo='{"uid":1,"name":"Wu Baiqi","address":"Olympiakatu","postiCode":65100, "email": "e0901026@gmail.com","telphone":"0405555570","headphoto":"wubaiqi.png"}';
+                var timoinfo='{"uid":2,"name":"Timo","address":"Vorinkatu","postiCode":65100, "email": "timo@gmail.com","telphone":"0406546745","headphoto":"timo.png"}';
+                var fengbininfo='{"uid":3,"name":"Feng Bin","address":"Olympiakatu","postiCode":65100, "email": "binfeng@gmail.com","telphone":"040347762","headphoto":"fengbin.png"}';
+                
+                var selectedCustomerId;
+                
+                
+                function hideAllPanels(){
+                    $('div.panel').hide();
+                   
+                }
+
+
+
+                editableGrid = new EditableGrid("DemoGridJSON", {
+        			
+					// called when the XML has been fully loaded 
+					tableLoaded: function() {
+						
+						// renderer for the action column
+						this.setCellRenderer("photo", new CellRenderer({render: function(cell, value) {
+
+							
+							
+							//cell.innerHTML = "<a href='' rel='external'><img src='images/thumb/002.jpg' alt='Image 002' /></a>";
+							cell.innerHTML = "<a href='' rel='external' id='image_link_" + cell.rowIndex + "'> <img style='width:120px;visibility:hidden;display:none;' id='camera_image_" +  cell.rowIndex + "' src='' /></a>";
+							
+							//cell.innerHTML = "<a onclick=\"if (confirm('Are you sure you want to delete this person ? ')) takePicture();\" style=\"cursor:pointer\">" + "test link</a>";
+			//				cell.innerHTML = "<a onclick=\"if (confirm('Are you sure you want to delete this person ? ')) editableGrid.remove(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+			//									 "<img src=\"delete.png\" border=\"0\" alt=\"delete\" title=\"delete\"/></a>";
+						}})); 
+						
+						
+						this.setCellRenderer("newphoto", new CellRenderer({render: function(cell, value) {
+							//cell.innerHTML = "<a href='images/full/002.jpg' rel='external'><img src='images/thumb/002.jpg' alt='Image 002' /></a>";
+							cell.innerHTML = "<button onclick=\"if (confirm('Do you want to take a new picture ? ')) takePicture(" + cell.rowIndex + ");\" type='button'>" + "New Picture</button>";
+			//				cell.innerHTML = "<a onclick=\"if (confirm('Are you sure you want to delete this person ? ')) editableGrid.remove(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+			//									 "<img src=\"delete.png\" border=\"0\" alt=\"delete\" title=\"delete\"/></a>";
+						}})); 
+						
+						
+			
+						// render the grid
+						this.renderGrid("tablecontent", "testgrid"); 
+						var options = {};
+						//$("#tablecontent a").photoSwipe(options);
+					},
+					
+					// called when some value has been modified: we display a message
+					modelChanged: function(rowIdx, colIdx, oldValue, newValue, row) {
+						 _$("message").innerHTML = "<p class='ok'>New value is '" + newValue + "'</p>"; 
+					},
+					
+					rowSelected : function(oldRowIndex, newRowIndex){
+						//alert("oldRowIndex: " + oldRowIndex);
+						//alert("newRowIndex: " + newRowIndex);
+					}
+				});
+				
+				editableGrid.loadJSON("grid2.json");
+                
+                $(function () {
+                
+                  $('li.customerlistitem').live('click', function () { 
+                                                 var jsonData;
+                                                
+                                                $(this).attr('data-theme','a'); 
+                                                $(this).removeClass('ui-btn-hover-c ui-btn-up-c');
+                                                $(this).addClass('ui-btn-up-a');
+                                                $('li.customerlistitem').not(this).attr('data-theme','c');     
+                                                $('li.customerlistitem').not(this).removeClass('ui-btn-up-a');
+                                                $('li.customerlistitem').not(this).addClass('ui-btn-up-c');
+                                                $('#customerlist, .ui-listview-filter').toggle();
+                                                
+                                                var customerAtag=$(this).find('a');
+                                                var cutomerId = customerAtag.attr('id');
+                                                   
+                                                selectedCustomerId=cutomerId;
+                                        
+                                                
+                                                
+                                                $('#customerOperation  #customer-header-name').empty();
+                                                
+                                                if(selectedCustomerId==1){
+                                                jsonData=wubaiqiinfo;
+                                                }else if(selectedCustomerId==2){
+                                                jsonData=fengbininfo;
+                                                }else if(selectedCustomerId==3){
+                                                jsonData=timoinfo;
+                                                }
+                                                
+                                                $('#customerOperation  #customer-header-name').html((jsonData.name));
+
+                                                
+                                                $('#customerOperation').toggle('slow');
+                                                
+                                                });
+                  
+                  $('.btn_backtocustomerlist').live('click', function(){
+                                                    hideAllPanels();
+                                                    
+                                                    $('#customerOperation').toggle();
+                                                    $('#customerlist, .ui-listview-filter').toggle('slow');
+                                                    $('li.customerOptItem').attr('data-theme','c');     
+                                                    $('li.customerOptItem').removeClass('ui-btn-up-a');
+                                                    $('li.customerOptItem').addClass('ui-btn-up-c');
+                                                    
+                                                    });
+                  
+                  
+                  
+                  
+                  
+                  //info panel
+                  $('li a.displayCustomerInfoPanel').live('click',function(){
+                	   							hideAllPanels();
+
+                                                $('div#customerInfoPanel').show('slow');
+                                               
+                                               var jsonData;
+                                               if(selectedCustomerId==1){
+                                               jsonData=wubaiqiinfo;
+                                               }else if(selectedCustomerId==2){
+                                               jsonData=timoinfo;
+                                               }else if(selectedCustomerId==3){
+                                               jsonData=fengbininfo;
+                                               }
+                                               
+                                               var cusInfo=jQuery.parseJSON(jsonData); 
+                                               console.log(cusInfo);
+                                               
+                                               $('.customername').html(cusInfo.name);
+                                               $('.cuspostaddress').html(cusInfo.address);
+                                               $('.custelphone').html(cusInfo.telphone);
+                                               $('.cusemail').html(cusInfo.email);
+                                               $('.cusheadphoto').attr("src","img/"+cusInfo.headphoto);
+                            
+                                               });
+                  
+
+
+	// agreement panel
+                  $('li a.displayCustomerAgreementPanel').live('click',function(){
+							hideAllPanels();
+                      $('div#customerAgreementPanel').show('slow');
+                     
+                     });
+
+                 //house pics 
+                  $('li a.displayCustomerHousePicturePanel').live('click',function(){
+						hideAllPanels();
+               		 $('div#customerHousePicturePanel').show('slow');
+               
+              	 });
+// history inspection panel
+                  $('li a.displayCustomerHistoryInspectionPanel').live('click',function(){
+						hideAllPanels();
+						
+             		 $('div#customerHistoryInspectionPanel').show('slow');
+
+             		inspectionGrid = new EditableGrid("DemoGridJSON"); 
+             		inspectionGrid.tableLoaded = function() { this.renderGrid("historyInspectionTable_inspectionid", "testgrid"); };
+             		inspectionGrid.loadJSON("historyInspection.json");
+             
+            	 });
+
+                  // new inspection panel
+                  $('li a.displayCustomerNewInspectionPanel').live('click',function(){
+
+                							   hideAllPanels();
+                                               $('div#customerNewInspectionPanel').show('slow');
+                                               
+                                        
+                                         
+                            
+                                               });
+
+                  
+                  $('.customerOptItem').live('click',function(){
+                                             
+                                             $(this).attr('data-theme','a'); 
+                                             $(this).removeClass('ui-btn-hover-c ui-btn-up-c');
+                                             $(this).addClass('ui-btn-up-a');
+                                             $('li.customerOptItem').not(this).attr('data-theme','c');     
+                                             $('li.customerOptItem').not(this).removeClass('ui-btn-up-a');
+                                             $('li.customerOptItem').not(this).addClass('ui-btn-up-c');
+                                             
+                                             });
+                  
+                  
+                                            
+                  
+                  
+                  
+                
+                  
+                  });
+            
+            }
+
+
+        	function updatePhoto(imageURI,rowIndex){
+				
+				//alert("rowIndex: " + rowIndex);
+				//PhotoSwipe.detatch(myPhotoSwipe);
+				var cameraImageId = 'camera_image_' + rowIndex;
+				var imageLinkId = 'image_link_' + rowIndex;
+                var img = document.getElementById(cameraImageId);
+                img.style.visibility = "visible";
+                img.style.display = "block";
+                img.src = imageURI;
+				
+				document.getElementById(imageLinkId).href = imageURI;
+                document.getElementById('camera_status').innerHTML = "Success";
+				
+				var options = {};
+				var id = 123;
+				
+				
+				//window.Code.PhotoSwipe.detatch(myPhotoSwipe);
+				//myPhotoSwipe = $("#" + imageLinkId).photoSwipe(options, id);
+				if (typeof myPhotoSwipe != "undefined" && myPhotoSwipe != null) {
+					window.Code.PhotoSwipe.unsetActivateInstance(myPhotoSwipe);
+					window.Code.PhotoSwipe.detatch(myPhotoSwipe);
+				}
+				
+				myPhotoSwipe = window.Code.PhotoSwipe.attach( window.document.querySelectorAll("#" + imageLinkId), options );
+//				myPhotoSwipe = $("#" + imageLinkId).photoSwipe(options, id);
+			}
+			
+			
+			function takePicture(rowIndex) {
+			
+		        navigator.camera.getPicture(
+					function(imageURI){
+						updatePhoto(imageURI,rowIndex);
+						uploadPhoto(imageURI);
+					},
+		            function(e) {
+		                console.log("Error getting picture: " + e);
+		                document.getElementById('camera_status').innerHTML = "Error getting picture.";
+		            },
+		            { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI});
+		    }
+			
+			
+			
+			function uploadPhoto(imageURI) {
+	            var options = new FileUploadOptions();
+	            options.fileKey="file";
+	            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+	            options.mimeType="image/jpeg";
+	
+	            var params = new Object();
+	            params.value1 = "test";
+	            params.value2 = "param";
+	
+	            options.params = params;
+	
+	            var ft = new FileTransfer();
+	            ft.upload(imageURI, "http://192.168.1.134:8080/restweb/jersey/fileupload", win, fail, options);
+	        }
+			
+			
+			function win(r) {
+	            console.log("Code = " + r.responseCode);
+	            console.log("Response = " + r.response);
+	            console.log("Sent = " + r.bytesSent);
+				alert("Upload Success!!");
+	        }
+	
+	        function fail(error) {
+	            alert("An error has occurred: Code = " + error.code);
+	        }                  
+        
+          
+            
+        </script>
+</body>
+</html>

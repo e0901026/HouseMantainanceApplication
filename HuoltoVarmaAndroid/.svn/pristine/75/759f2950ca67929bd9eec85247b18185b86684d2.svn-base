@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+        <title>Jquery Mobile Splitview</title> 
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+            <link rel="stylesheet" href="css/jquery.mobile.css" />
+            <link rel="stylesheet" href="css/jquery.mobile.splitview.css" />
+            <link rel="stylesheet"  href="css/jquery.mobile.grids.collapsible.css" />
+            <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+            <script type="text/javascript" src="js/jquery.mobile.splitview.js"></script>
+            <script type="text/javascript" src="js/jquery.mobile.js"></script>
+            <script type="text/javascript" src="js/iscroll-wrapper.js"></script>
+            <script type="text/javascript" src="js/iscroll.js"></script>
+            <!--script type="text/javascript" src="scrollability.js"></script-->
+            <script type="text/javascript" src="cordova-2.0.0.js"></script>
+            <script type="text/javascript" src="js/index.js"></script>
+            <script type="text/javascript">
+                app.initialize();
+                </script>
+            </head> 
+
+  <body> 
+
+      <div data-role="panel" data-id="menu" data-hash="crumbs" data-context="a#default">
+          <!-- Start of first page -->
+          <div data-role="page" id="main" data-hash="false">
+              
+              <div data-role="header">
+                  <h1>Main</h1>
+              </div><!-- /header -->
+              
+              <div data-role="content">	
+                  <ul data-role="listview" data-filter="true" data-inset="true">
+                      <li><a href="#acura" data-panel="main">Acura</a></li>
+                      <li><a href="#audi" data-panel="main">Audi</a></li>
+                      <li><a href="#bmw" data-panel="main">BMW</a></li>
+                  </ul> 	
+              </div><!-- /content -->
+          </div><!-- /page -->
+          
+      </div><!-- panel menu -->
+      
+      
+      
+      <div data-role="panel" data-id="main">
+          
+          <div data-role="page" id="acura">
+              
+              <div data-role="header">
+                  <h1>About Acura</h1>
+              </div><!-- /header -->
+              
+              <div data-role="content"> 
+                  Acura Info
+              </div><!-- /content -->
+          </div><!-- /page -->
+          
+          <!-- Start of 6th page -->
+          <div data-role="page" id="audi">
+              
+              <div data-role="header">
+                  <h1>About Audi</h1>
+              </div><!-- /header -->
+              
+              <div data-role="content"> 
+                  Audi Info
+              </div><!-- /content -->
+          </div><!-- /page -->
+          
+          
+          
+          
+          <!-- Start of 6th page -->
+          <div data-role="page" id="bmw">
+              
+              <div data-role="header">
+                  <h1>About bmw</h1>
+              </div><!-- /header -->
+              
+              <div data-role="content"> 
+                  bmw Info
+              </div><!-- /content -->
+          </div><!-- /page -->
+      </div><!-- panel main -->
+      
+  </body>
+</html>

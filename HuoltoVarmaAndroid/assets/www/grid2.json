@@ -1,0 +1,13 @@
+{"metadata":[
+	{"name":"section","label":"SECTION","datatype":"string","editable":true},
+	{"name":"task","label":"TASK","datatype":"string","editable":true},
+	{"name":"description","label":"DESCRIPTION","datatype":"string","editable":true},
+	{"name":"photo","label":"PHOTO","datatype":"html","editable":false},
+	{"name":"newphoto","label":"TAKE PHOTO","datatype":"html","editable":false},
+	{"name":"check","label":"CHECK","datatype":"boolean","editable":true}
+],
+
+"data":[
+	{"id":1, "values":{"section":"section1","task":"task1","description":"description1","check":true}},
+	{"id":2, "values":{"section":"section2","task":"task2","description":"description2","check":false}}
+]}

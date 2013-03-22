@@ -1,0 +1,15 @@
+{"metadata":[
+
+	{"name":"inspectiondate","label":"INSPECTION DATE","datatype":"date","editble":true},
+	{"name":"photo","label":"PHOTO","datatype":"html","editable":false},
+	{"name":"section","label":"SECTION","datatype":"string","editable":true},
+	{"name":"task","label":"TASK","datatype":"string","editable":true},
+	{"name":"description","label":"DESCRIPTION","datatype":"string","editable":true},
+	{"name":"state","label":"STATE","datatype":"string","editable":true,"values":{"do":"DONE","undo":"UNDO"}}
+	
+],
+
+"data":[
+	{"id":1, "values":{"inspectiondate":"12\/05\/2009","photo":"<a href='' rel='external'> <img style='width:50px;height: 50px;' src='img/016.jpg' /></a>","section":"section1","task":"task1","description":"description1","state":"do"}},
+	{"id":2, "values":{"inspectiondate":"12\/05\/2009","photo":"<a href='' rel='external'> <img style='width:50px;height: 50px;' src='img/016.jpg' /></a>","section":"section2","task":"task1","description":"description2","state":"undo"}}
+]}
